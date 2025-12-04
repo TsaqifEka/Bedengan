@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets - Bedengan Camping Ground</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bedengan: {
+                            dark: '#0f3923',
+                            primary: '#22c55e', // Warna hijau tombol
+                            light: '#4ade80',
+                            surface: '#ecfdf5', // Warna background kartu saat dipilih
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        /* Logic CSS untuk Kartu Tiket */
+        /* Saat radio button dicek, ubah border dan background div tetangganya */
+        .ticket-radio:checked + div {
+            border-color: #22c55e;
+            background-color: #ecfdf5;
+        }
+        /* Ubah warna teks harga saat dicek */
+        .ticket-radio:checked + div .ticket-price {
+            color: #15803d; 
+        }
+        
+        /* Hilangkan panah di input number */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; margin: 0; 
+        }
+    </style>
+</head>
+<body class="bg-white font-sans text-gray-700 antialiased">
+
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm py-4 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            
+            <a href="index.html" class="flex items-center gap-2 group">
+                <h1 class="font-serif text-2xl font-bold text-bedengan-dark tracking-wide">
+                    Bedengan
+                </h1>
+            </a>
+
+            <div class="hidden md:flex items-center gap-2 text-sm font-medium">
+                <a href="index.html" class="px-4 py-2 text-gray-500 hover:text-bedengan-primary hover:bg-bedengan-surface hover:rounded-full transition-colors">Home</a>
+                <a href="tiket.html" class="px-6 py-2 rounded-full bg-bedengan-surface text-bedengan-primary font-bold transition-all">Tickets</a>
+                <a href="rent.html" class="px-4 py-2 text-gray-500 hover:text-bedengan-primary hover:bg-bedengan-surface hover:rounded-full transition-colors">Equipment Rental</a>
+                <a href="moment.html" class="px-4 py-2 text-gray-500 hover:text-bedengan-primary hover:bg-bedengan-surface hover:rounded-full transition-colors">Moments</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="login.html" class="px-6 py-2 rounded-full bg-bedengan-primary text-white text-sm font-semibold hover:bg-green-600 hover:shadow-lg transition-all shadow-green-900/20">
+                    Sign-In
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-28 pb-20 bg-white min-h-screen">
+        
+        <div class="text-center mb-8 px-4">
+            <span class="text-bedengan-primary font-medium text-sm tracking-wide">Book Your Visit</span>
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-bedengan-dark mt-2 mb-2">Ticket Booking</h1>
+            <p class="text-gray-500 text-sm">Reserve your spot at Bedengan Camping Ground</p>
+        </div>
+
+        <div class="flex justify-center items-center gap-4 mb-12">
+            <div class="w-10 h-10 rounded-full bg-bedengan-primary text-white flex items-center justify-center font-bold shadow-lg">1</div>
+            
+            <div class="w-16 h-1 bg-gray-200 rounded-full"></div>
+            
+            <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold">2</div>
+            
+            <div class="w-16 h-1 bg-gray-200 rounded-full"></div>
+            
+            <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold">3</div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-xl">
+                
+                <h3 class="font-serif text-2xl font-bold text-bedengan-dark mb-6">Select Your Visit Details</h3>
+                
+                <form id="bookingForm">
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Visit Date</label>
+                        <div class="relative">
+                            <input type="text" id="datePicker" class="w-full px-4 py-3 rounded-xl border border-bedengan-primary text-gray-700 focus:outline-none focus:ring-1 focus:ring-bedengan-primary bg-white cursor-pointer pl-11" placeholder="Pick a date">
+                            <svg class="w-5 h-5 text-gray-400 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">Ticket Type</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <label class="cursor-pointer group relative">
+                                <input type="radio" name="ticketType" value="25000" class="ticket-radio sr-only" checked onchange="updateTotal()">
+                                <div class="p-5 rounded-xl border border-gray-300 bg-white hover:border-bedengan-primary transition-all h-full flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-lg">Weekday Pass</h4>
+                                        <p class="text-sm text-gray-500 mb-3">Monday to Thursday</p>
+                                    </div>
+                                    <div class="font-bold text-bedengan-primary ticket-price text-lg">Rp 25.000</div>
+                                </div>
+                            </label>
+                            
+                            <label class="cursor-pointer group relative">
+                                <input type="radio" name="ticketType" value="35000" class="ticket-radio sr-only" onchange="updateTotal()">
+                                <div class="p-5 rounded-xl border border-gray-300 bg-white hover:border-bedengan-primary transition-all h-full flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-lg">Weekend Pass</h4>
+                                        <p class="text-sm text-gray-500 mb-3">Friday to Sunday & Holidays</p>
+                                    </div>
+                                    <div class="font-bold text-bedengan-primary ticket-price text-lg">Rp 35.000</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">Number of Visitors</label>
+                        <div class="flex items-center gap-3">
+                            <button type="button" onclick="updateCount(-1)" class="w-10 h-10 rounded-lg border border-bedengan-primary text-bedengan-primary hover:bg-bedengan-primary hover:text-white transition flex items-center justify-center text-xl font-medium bg-white">
+                                −
+                            </button>
+                            
+                            <div class="w-16 h-10 flex items-center justify-center bg-gray-200 rounded-lg">
+                                <span class="text-lg font-bold text-gray-800 flex gap-2 items-center">
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    <span id="visitorCountDisplay">1</span>
+                                </span>
+                                <input type="hidden" id="visitorCount" value="1">
+                            </div>
+
+                            <button type="button" onclick="updateCount(1)" class="w-10 h-10 rounded-lg border border-bedengan-primary text-bedengan-primary hover:bg-bedengan-primary hover:text-white transition flex items-center justify-center text-xl font-medium bg-white">
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <h4 class="font-bold text-gray-800 mb-4">Contact Information</h4>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Full Name</label>
+                                <input type="text" placeholder="Enter your name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-bedengan-primary focus:ring-1 focus:ring-bedengan-primary transition-colors bg-white">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Email</label>
+                                <input type="email" placeholder="Enter your email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-bedengan-primary focus:ring-1 focus:ring-bedengan-primary transition-colors bg-white">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Phone Number</label>
+                                <input type="tel" placeholder="Enter your phone number" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-bedengan-primary focus:ring-1 focus:ring-bedengan-primary transition-colors bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between mt-10 pt-6 border-t border-gray-200">
+                        <div>
+                            <p class="text-gray-600 text-lg">Total</p>
+                            <h3 class="text-2xl font-bold text-bedengan-primary" id="totalPriceDisplay">Rp 25.000</h3>
+                        </div>
+                        
+                        <a href="payment.html" class="bg-bedengan-primary hover:bg-green-600 text-white font-medium px-8 py-3 rounded-lg shadow-md transition-all transform hover:-translate-y-0.5">
+                            Continue to Payment
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="bg-bedengan-dark text-white pt-16 pb-8 border-t-4 border-bedengan-primary">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold mb-4">Bedengan</h2>
+                    <p class="text-gray-300 leading-relaxed text-sm">The best nature destination in Greater Malang. Enjoy the sensation of camping in the middle of a beautiful and calming pine forest.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-bedengan-light">Navigation</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="index.html" class="hover:text-bedengan-primary transition">Home</a></li>
+                        <li><a href="tiket.html" class="hover:text-bedengan-primary transition">Tickets</a></li>
+                        <li><a href="rent.html" class="hover:text-bedengan-primary transition">Equipment Rental</a></li>
+                        <li><a href="#lokasi" class="hover:text-bedengan-primary transition">Location</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-bedengan-light">Contact</h3>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <span>Jl. Raya Bedengan, Malang</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500">
+                © 2024 Bedengan Camping Ground.
+            </div>
+            
+        </div>
+    </footer>
+
+    <script>
+        // Init Datepicker
+        flatpickr("#datePicker", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            defaultDate: "today"
+        });
+
+        // Counter & Price Logic
+        let count = 1;
+        
+        function updateCount(change) {
+            count += change;
+            if (count < 1) count = 1;
+            
+            document.getElementById('visitorCount').value = count;
+            document.getElementById('visitorCountDisplay').innerText = count;
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const ticketPrice = parseInt(document.querySelector('input[name="ticketType"]:checked').value);
+            const total = ticketPrice * count;
+            
+            // Format Rupiah
+            const formatted = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(total);
+            
+            // Hapus "IDR" dan spasi, ganti dengan format yang diinginkan
+            const cleanFormat = formatted.replace("IDR", "Rp").trim();
+
+            document.getElementById('totalPriceDisplay').innerText = cleanFormat;
+        }
+    </script>
+</body>
+</html>

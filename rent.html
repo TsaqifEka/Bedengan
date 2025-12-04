@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Equipment - Bedengan Camping Ground</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bedengan: {
+                            dark: '#0f3923',
+                            primary: '#22c55e',
+                            light: '#4ade80',
+                            surface: '#ecfdf5',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+<body class="bg-white font-sans text-gray-700 antialiased">
+
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm py-4 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            
+            <a href="index.html" class="flex items-center gap-2 group">
+                <h1 class="font-serif text-2xl font-bold text-bedengan-dark tracking-wide">
+                    Bedengan
+                </h1>
+            </a>
+
+            <div class="hidden md:flex items-center gap-2 text-sm font-medium">
+                <a href="index.html" class="px-4 py-2 text-gray-500 hover:text-bedengan-primary hover:bg-bedengan-surface hover:rounded-full transition-colors">Home</a>
+                <a href="tiket.html" class="px-4 py-2 text-gray-500 hover:text-bedengan-primary hover:bg-bedengan-surface hover:rounded-full transition-colors">Tickets</a>
+                <a href="rent.html" class="px-6 py-2 rounded-full bg-bedengan-surface text-bedengan-primary font-bold transition-all">Equipment Rental</a>
+                <a href="moment.html" class="px-4 py-2 text-gray-500 hover:text-bedengan-primary hover:bg-bedengan-surface hover:rounded-full transition-colors">Moments</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="login.html" class="px-6 py-2 rounded-full bg-bedengan-primary text-white text-sm font-semibold hover:bg-green-600 shadow-md transition-all">
+                    Sign-In
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-28 pb-40 bg-white min-h-screen">
+        
+        <div class="text-center mb-8 px-4">
+            <span class="text-bedengan-primary font-medium text-sm tracking-wide uppercase">Gear Up</span>
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-bedengan-dark mt-2 mb-4">Equipment Rental</h1>
+            <p class="text-gray-500 text-sm">Rent quality camping gear for your adventure</p>
+        </div>
+
+        <div class="flex justify-center items-center gap-4 mb-12">
+            <div class="w-10 h-10 rounded-full bg-bedengan-primary text-white flex items-center justify-center font-bold shadow-lg">1</div>
+            <div class="w-16 h-1 bg-gray-200 rounded-full"></div>
+            <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold">2</div>
+            <div class="w-16 h-1 bg-gray-200 rounded-full"></div>
+            <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold">3</div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-xl">
+                
+                <h3 class="font-serif text-xl font-bold text-bedengan-dark mb-6">Rental Period</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-2">Start Date</label>
+                        <div class="relative">
+                            <input type="text" id="startDate" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-bedengan-primary bg-white pl-11" placeholder="Pick start date">
+                            <svg class="w-5 h-5 text-gray-400 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-2">End Date</label>
+                        <div class="relative">
+                            <input type="text" id="endDate" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-bedengan-primary bg-white pl-11" placeholder="Pick end date">
+                            <svg class="w-5 h-5 text-gray-400 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="font-serif text-xl font-bold text-bedengan-dark mb-6">Select Equipment</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all hover:border-bedengan-primary/50 group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Tent">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 text-lg">2-Person Tent</h4>
+                                <span class="bg-bedengan-surface text-bedengan-primary text-xs font-bold px-2 py-1 rounded-lg">Rp 75k/day</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4 leading-relaxed line-clamp-2">Compact waterproof dome tent, easy to set up for couples.</p>
+                            
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex items-center gap-3">
+                                    <button onclick="updateQty(1, -1)" class="w-8 h-8 rounded-lg border border-gray-300 text-gray-500 hover:border-bedengan-primary hover:text-bedengan-primary transition flex items-center justify-center text-lg pb-1">−</button>
+                                    <span id="qty-1" class="w-6 text-center font-bold text-gray-800">0</span>
+                                    <button onclick="updateQty(1, 1)" class="w-8 h-8 rounded-lg border border-bedengan-primary text-bedengan-primary hover:bg-bedengan-surface transition flex items-center justify-center text-lg pb-1">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all hover:border-bedengan-primary/50 group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Big Tent">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 text-lg">4-Person Tent</h4>
+                                <span class="bg-bedengan-surface text-bedengan-primary text-xs font-bold px-2 py-1 rounded-lg">Rp 125k/day</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4 leading-relaxed line-clamp-2">Spacious family tent with vestibule for extra luggage storage.</p>
+                            
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex items-center gap-3">
+                                    <button onclick="updateQty(2, -1)" class="w-8 h-8 rounded-lg border border-gray-300 text-gray-500 hover:border-bedengan-primary hover:text-bedengan-primary transition flex items-center justify-center text-lg pb-1">−</button>
+                                    <span id="qty-2" class="w-6 text-center font-bold text-gray-800">0</span>
+                                    <button onclick="updateQty(2, 1)" class="w-8 h-8 rounded-lg border border-bedengan-primary text-bedengan-primary hover:bg-bedengan-surface transition flex items-center justify-center text-lg pb-1">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all hover:border-bedengan-primary/50 group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1627662168806-efa33a7cda86?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Sleeping Bag">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 text-lg">Sleeping Bag</h4>
+                                <span class="bg-bedengan-surface text-bedengan-primary text-xs font-bold px-2 py-1 rounded-lg">Rp 35k/day</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4 leading-relaxed line-clamp-2">Warm and cozy sleeping bag suitable for cold mountain nights.</p>
+                            
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex items-center gap-3">
+                                    <button onclick="updateQty(3, -1)" class="w-8 h-8 rounded-lg border border-gray-300 text-gray-500 hover:border-bedengan-primary hover:text-bedengan-primary transition flex items-center justify-center text-lg pb-1">−</button>
+                                    <span id="qty-3" class="w-6 text-center font-bold text-gray-800">0</span>
+                                    <button onclick="updateQty(3, 1)" class="w-8 h-8 rounded-lg border border-bedengan-primary text-bedengan-primary hover:bg-bedengan-surface transition flex items-center justify-center text-lg pb-1">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all hover:border-bedengan-primary/50 group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1545063067-1721df227271?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Stove">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 text-lg">Portable Stove</h4>
+                                <span class="bg-bedengan-surface text-bedengan-primary text-xs font-bold px-2 py-1 rounded-lg">Rp 50k/day</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4 leading-relaxed line-clamp-2">Windproof portable gas stove (gas canister not included).</p>
+                            
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex items-center gap-3">
+                                    <button onclick="updateQty(4, -1)" class="w-8 h-8 rounded-lg border border-gray-300 text-gray-500 hover:border-bedengan-primary hover:text-bedengan-primary transition flex items-center justify-center text-lg pb-1">−</button>
+                                    <span id="qty-4" class="w-6 text-center font-bold text-gray-800">0</span>
+                                    <button onclick="updateQty(4, 1)" class="w-8 h-8 rounded-lg border border-bedengan-primary text-bedengan-primary hover:bg-bedengan-surface transition flex items-center justify-center text-lg pb-1">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all hover:border-bedengan-primary/50 group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1533630763270-349cebf77746?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Cook Set">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 text-lg">Cooking Set</h4>
+                                <span class="bg-bedengan-surface text-bedengan-primary text-xs font-bold px-2 py-1 rounded-lg">Rp 40k/day</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4 leading-relaxed line-clamp-2">Complete set of pots, pans, and utensils for outdoor cooking.</p>
+                            
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex items-center gap-3">
+                                    <button onclick="updateQty(5, -1)" class="w-8 h-8 rounded-lg border border-gray-300 text-gray-500 hover:border-bedengan-primary hover:text-bedengan-primary transition flex items-center justify-center text-lg pb-1">−</button>
+                                    <span id="qty-5" class="w-6 text-center font-bold text-gray-800">0</span>
+                                    <button onclick="updateQty(5, 1)" class="w-8 h-8 rounded-lg border border-bedengan-primary text-bedengan-primary hover:bg-bedengan-surface transition flex items-center justify-center text-lg pb-1">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all hover:border-bedengan-primary/50 group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Lantern">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 text-lg">LED Lantern</h4>
+                                <span class="bg-bedengan-surface text-bedengan-primary text-xs font-bold px-2 py-1 rounded-lg">Rp 25k/day</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4 leading-relaxed line-clamp-2">Bright battery-powered LED lantern for campsite lighting.</p>
+                            
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex items-center gap-3">
+                                    <button onclick="updateQty(6, -1)" class="w-8 h-8 rounded-lg border border-gray-300 text-gray-500 hover:border-bedengan-primary hover:text-bedengan-primary transition flex items-center justify-center text-lg pb-1">−</button>
+                                    <span id="qty-6" class="w-6 text-center font-bold text-gray-800">0</span>
+                                    <button onclick="updateQty(6, 1)" class="w-8 h-8 rounded-lg border border-bedengan-primary text-bedengan-primary hover:bg-bedengan-surface transition flex items-center justify-center text-lg pb-1">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="pt-6 border-t border-gray-200">
+                    <h3 class="font-serif text-xl font-bold text-bedengan-dark mb-6">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">Full Name</label>
+                            <input type="text" placeholder="Enter your name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-bedengan-primary bg-white transition-colors">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Email</label>
+                                <input type="email" placeholder="Enter your email" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-bedengan-primary bg-white transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Phone Number</label>
+                                <input type="tel" placeholder="Enter your phone number" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-bedengan-primary bg-white transition-colors">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-between mt-10 pt-6 border-t border-gray-200 gap-4">
+                    <div class="text-center md:text-left">
+                        <p class="text-gray-500 text-sm">Total (<span id="daysCount">1</span> day)</p>
+                        <h3 class="text-3xl font-bold text-bedengan-primary" id="totalPrice">Rp 0</h3>
+                    </div>
+                    
+                    <a href="pay-rent.html" class="w-full md:w-auto bg-bedengan-primary hover:bg-green-600 text-white font-bold text-lg px-10 py-3 rounded-xl shadow-lg shadow-green-500/30 transition-all text-center transform hover:-translate-y-0.5">
+                        Continue to Payment
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-bedengan-dark text-white pt-16 pb-8 border-t-4 border-bedengan-primary">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold mb-4">Bedengan</h2>
+                    <p class="text-gray-300 leading-relaxed text-sm">The best nature destination in Greater Malang. Enjoy the sensation of camping in the middle of a beautiful and calming pine forest.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-bedengan-light">Navigation</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="index.html" class="hover:text-bedengan-primary transition">Home</a></li>
+                        <li><a href="tiket.html" class="hover:text-bedengan-primary transition">Tickets</a></li>
+                        <li><a href="rent.html" class="hover:text-bedengan-primary transition">Equipment Rental</a></li>
+                        <li><a href="#lokasi" class="hover:text-bedengan-primary transition">Location</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-bedengan-light">Contact</h3>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <span>Jl. Raya Bedengan, Malang</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500">
+                © 2024 Bedengan Camping Ground.
+            </div>
+            
+        </div>
+    </footer>
+
+    <script>
+        // Mapping Harga (Karena HTML sudah manual, kita simpan harga di sini untuk hitungan JS)
+        const PRICES = {
+            1: 75000,  // Tenda Kecil
+            2: 125000, // Tenda Besar
+            3: 35000,  // Sleeping Bag
+            4: 50000,  // Kompor
+            5: 40000,  // Cooking Set
+            6: 25000   // Lampu
+        };
+
+        // Simpan jumlah barang yang dipilih
+        const quantities = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0 };
+
+        // --- FLATPICKR ---
+        let duration = 1;
+
+        const fpStart = flatpickr("#startDate", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            onChange: function(selectedDates, dateStr, instance) {
+                fpEnd.set('minDate', dateStr);
+                calculateDuration();
+            }
+        });
+
+        const fpEnd = flatpickr("#endDate", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            onChange: function() {
+                calculateDuration();
+            }
+        });
+
+        function calculateDuration() {
+            const start = fpStart.selectedDates[0];
+            const end = fpEnd.selectedDates[0];
+
+            if (start && end) {
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                duration = diffDays === 0 ? 1 : diffDays; 
+            } else {
+                duration = 1;
+            }
+            
+            document.getElementById('daysCount').innerText = duration;
+            updateTotal();
+        }
+
+        function updateQty(id, change) {
+            const current = quantities[id];
+            const newVal = current + change;
+            
+            if (newVal >= 0) {
+                quantities[id] = newVal;
+                document.getElementById(`qty-${id}`).innerText = newVal;
+                updateTotal();
+            }
+        }
+
+        function updateTotal() {
+            let itemTotal = 0;
+            
+            // Loop semua item untuk hitung total
+            for (const [id, qty] of Object.entries(quantities)) {
+                itemTotal += (PRICES[id] * qty);
+            }
+
+            const grandTotal = itemTotal * duration;
+
+            document.getElementById('totalPrice').innerText = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(grandTotal).replace("IDR", "Rp").trim();
+        }
+    </script>
+</body>
+</html>
