@@ -17,10 +17,10 @@
                 extend: {
                     colors: {
                         bedengan: {
-                            dark: '#0f3923',    /* Dark Forest Green */
-                            primary: '#22c55e', /* Bright Green */
-                            light: '#4ade80',   /* Light Green */
-                            surface: '#f0fdf4', /* Minty White */
+                            dark: '#0f3923',    
+                            primary: '#22c55e', 
+                            light: '#4ade80',   
+                            surface: '#f0fdf4', 
                         }
                     },
                     fontFamily: {
@@ -80,15 +80,11 @@
         <section id="beranda" class="relative w-full h-screen overflow-hidden flex items-center justify-center text-center px-4">
             
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1510797215324-95aa89f43c33?q=80&w=1935&auto=format&fit=crop" class="w-full h-full object-cover">
+                <img src="img/hero.jpg" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-b from-bedengan-dark/80 via-bedengan-dark/40 to-bedengan-dark/95"></div>
             </div>
 
             <div class="relative z-10 max-w-4xl mx-auto mt-10">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs text-white font-medium mb-6">
-                    <span>🏕️</span><span>Welcome to South Malang</span>
-                </div>
-                
                 <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
                     Escape to Nature's <br>
                     <span class="text-bedengan-light">Paradise</span>
@@ -345,38 +341,34 @@
             const links = navMenu.querySelectorAll('.nav-link');
 
             if (!isScrolled) {
-                // --- STATE: TRANSPARENT (Top of Page) ---
+                // nav transparan
                 navbar.classList.remove('bg-white', 'shadow-md');
                 navbar.classList.add('bg-transparent');
                 
-                // Logo Text -> Putih
+                // logo
                 logoText.classList.remove('text-bedengan-dark');
                 logoText.classList.add('text-white');
 
-                // Active Home Link -> Putih Transparan
+                // home nav
                 homeLink.classList.remove('bg-bedengan-primary/10', 'text-bedengan-primary');
                 homeLink.classList.add('bg-white/20', 'text-white');
 
-                // Inactive Links -> Teks Putih
+                // Ihover
                 links.forEach(link => {
                     link.classList.remove('text-gray-600', 'hover:bg-bedengan-primary/10');
                     link.classList.add('text-gray-200', 'hover:bg-white/10');
                 });
 
             } else {
-                // --- STATE: SOLID (Scrolled Down) ---
+                // nav normal
                 navbar.classList.remove('bg-transparent');
                 navbar.classList.add('bg-white', 'shadow-md');
                 
-                // Logo Text -> Hijau Gelap
                 logoText.classList.remove('text-white');
                 logoText.classList.add('text-bedengan-dark');
-
-                // Active Home Link -> Hijau Muda (Pill Style seperti di Tiket)
                 homeLink.classList.remove('bg-white/20', 'text-white');
                 homeLink.classList.add('bg-bedengan-primary/10', 'text-bedengan-primary');
 
-                // Inactive Links -> Teks Abu Gelap
                 links.forEach(link => {
                     link.classList.remove('text-gray-200', 'hover:bg-white/10');
                     link.classList.add('text-gray-600', 'hover:bg-bedengan-primary/10');

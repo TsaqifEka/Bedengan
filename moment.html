@@ -34,18 +34,18 @@
 
     <style>
         html { scroll-behavior: smooth; }
-        /* Animasi Modal */
+        /* modal */
         .modal-enter { opacity: 0; transform: scale(0.95); }
         .modal-enter-active { opacity: 1; transform: scale(1); transition: all 0.3s ease-out; }
         .modal-exit { opacity: 1; transform: scale(1); }
         .modal-exit-active { opacity: 0; transform: scale(0.95); transition: all 0.2s ease-in; }
         
-        /* Bintang Rating */
+        /* star rating mimen */
         .star-rating input { display: none; }
         .star-rating label { cursor: pointer; transition: color 0.2s; }
         .star-rating label:hover,
         .star-rating label:hover ~ label,
-        .star-rating input:checked ~ label { color: #fbbf24; } /* Warna Kuning Emas */
+        .star-rating input:checked ~ label { color: #fbbf24; } 
     </style>
 </head>
 <body class="bg-white font-sans text-gray-700 antialiased">
@@ -65,7 +65,7 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <a href="#" class="px-6 py-2 rounded-full bg-bedengan-primary text-white text-sm font-semibold hover:bg-green-600 shadow-md transition-all">Sign-In</a>
+                <a href="login.html" class="px-6 py-2 rounded-full bg-bedengan-primary text-white text-sm font-semibold hover:bg-green-600 shadow-md transition-all">Sign-In</a>
             </div>
         </nav>
     </header>
@@ -244,25 +244,24 @@
             // Trigger reflow
             void modal.offsetWidth;
             
-            // Add animation classes
+            // animasi
             backdrop.classList.add('opacity-100');
             panel.classList.remove('scale-95', 'opacity-0');
             panel.classList.add('scale-100', 'opacity-100');
         }
 
         function closeModal() {
-            // Reverse animation
+            // animasi kluear
             backdrop.classList.remove('opacity-100');
             panel.classList.remove('scale-100', 'opacity-100');
             panel.classList.add('scale-95', 'opacity-0');
 
-            // Wait for animation to finish
             setTimeout(() => {
                 modal.classList.add('hidden');
             }, 200);
         }
 
-        // Close on backdrop click
+        // close modal
         modal.addEventListener('click', (e) => {
             if (e.target === backdrop || e.target.closest('.flex') === e.target) {
                 closeModal();

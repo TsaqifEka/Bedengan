@@ -20,7 +20,7 @@
                             dark: '#0f3923',
                             primary: '#22c55e',
                             light: '#4ade80',
-                            surface: '#ecfdf5', /* Hijau sangat muda sesuai gambar */
+                            surface: '#ecfdf5', 
                         }
                     },
                     fontFamily: {
@@ -32,15 +32,6 @@
         }
     </script>
 
-    <style>
-        /* Hide scrollbar for clean look */
-        html { scroll-behavior: smooth; }
-        .method-active {
-            border-color: #22c55e;
-            background-color: #ecfdf5;
-            color: #0f3923;
-        }
-    </style>
 </head>
 <body class="bg-white font-sans text-gray-700 antialiased">
 
@@ -144,7 +135,7 @@
                 <div class="mb-8">
                     <label class="block text-sm font-medium text-gray-700 mb-3">Upload Proof of Payment</label>
                     <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-bedengan-primary hover:bg-gray-50 transition-all group relative">
-                        <input type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="previewFile(this)">
+                        <input type="file" required class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="previewFile(this)">
                         
                         <div id="upload-placeholder">
                             <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 mb-3 mx-auto group-hover:text-bedengan-primary group-hover:bg-green-50 transition-colors">
@@ -215,27 +206,21 @@
             const contentBank = document.getElementById('content-bank');
             const contentQris = document.getElementById('content-qris');
 
-            // Style Reset
-            const activeClass = ['border-bedengan-primary', 'bg-bedengan-surface', 'text-bedengan-dark'];
-            const inactiveClass = ['border-gray-100', 'text-gray-500'];
-
             if (method === 'bank') {
-                // Show Bank
+                // bayar bank
                 contentBank.classList.remove('hidden');
                 contentQris.classList.add('hidden');
                 
-                // Style Button
                 btnBank.classList.add(...activeClass);
                 btnBank.classList.remove(...inactiveClass);
                 
                 btnQris.classList.remove(...activeClass);
                 btnQris.classList.add(...inactiveClass);
             } else {
-                // Show QRIS
+                // qris
                 contentBank.classList.add('hidden');
                 contentQris.classList.remove('hidden');
 
-                // Style Button
                 btnQris.classList.add(...activeClass);
                 btnQris.classList.remove(...inactiveClass);
 
